@@ -24,7 +24,7 @@ function current_user(PDO $pdo): ?array
     if (empty($_SESSION['user_id'])) {
         return null;
     }
-    $statement = $pdo->prepare('SELECT id, full_name, username, email, created_at FROM users WHERE id = :id');
+    $statement = $pdo->prepare('SELECT id, full_name, username, email, profile_image, created_at FROM users WHERE id = :id');
     $statement->execute(['id' => $_SESSION['user_id']]);
     $user = $statement->fetch() ?: null;
     return $user;

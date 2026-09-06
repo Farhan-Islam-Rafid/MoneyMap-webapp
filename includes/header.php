@@ -4,6 +4,7 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 }
 $pageTitle = $pageTitle ?? 'MoneyMap v2.0';
 $isAuthenticated = !empty($_SESSION['user_id']);
+$navUser = $isAuthenticated ? current_user($pdo) : null;
 ?>
 <!doctype html>
 <html lang="en">
@@ -17,6 +18,7 @@ $isAuthenticated = !empty($_SESSION['user_id']);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
+    <script>if (localStorage.getItem('moneymap-theme') === 'dark') document.documentElement.dataset.theme = 'dark';</script>
 </head>
 <body>
 <?php if ($isAuthenticated): ?>
@@ -29,13 +31,14 @@ $isAuthenticated = !empty($_SESSION['user_id']);
                 <a class="nav-link" href="dashboard.php"><i class="fa-solid fa-grid-2 me-1"></i> Dashboard</a>
                 <a class="nav-link" href="transactions.php"><i class="fa-solid fa-receipt me-1"></i> Transactions</a>
                 <a class="nav-link" href="archive.php"><i class="fa-solid fa-box-archive me-1"></i> Archive</a>
-                <a class="nav-link" href="profile.php"><i class="fa-solid fa-user me-1"></i> Profile</a>
+                <a class="nav-link nav-profile" href="profile.php"><?php if (!empty($navUser['profile_image'])): ?><img class="avatar avatar-sm" src="assets/uploads/<?= e($navUser['profile_image']) ?>" alt="Profile image"><?php else: ?><i class="fa-solid fa-user me-1"></i><?php endif; ?> Profile</a>
                 <a class="btn btn-outline-danger btn-sm ms-lg-2" href="logout.php"><i class="fa-solid fa-arrow-right-from-bracket me-1"></i> Logout</a>
             </div>
         </div>
     </div>
 </nav>
 <?php endif; ?>
+<button class="theme-toggle" type="button" aria-label="Toggle night mode" title="Toggle night mode"><i class="fa-solid fa-moon"></i></button>
 <main class="app-shell <?= $isAuthenticated ? 'page-content' : '' ?>">
 <?php if ($message = flash('success')): ?><div class="alert alert-success mt-3"><i class="fa-solid fa-circle-check me-2"></i><?= e($message) ?></div><?php endif; ?>
 <?php if ($message = flash('error')): ?><div class="alert alert-danger mt-3"><i class="fa-solid fa-circle-exclamation me-2"></i><?= e($message) ?></div><?php endif; ?>
