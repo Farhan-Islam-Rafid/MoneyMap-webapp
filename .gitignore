@@ -1,0 +1,8 @@
+.env
+.env.*
+!.env.example
+
+# Google OAuth downloads and local credential files
+client_secret_*.json
+*-credentials.json
+config/google.local.php

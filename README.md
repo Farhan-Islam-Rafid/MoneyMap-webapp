@@ -7,6 +7,7 @@ It helps users track income and expenses, understand monthly cash flow, review f
 ## Features
 
 - User registration and login
+- Google sign-in with automatic account creation
 - Session-based authentication
 - Secure password hashing with `password_hash()` and `password_verify()`
 - Dashboard with dynamic financial summaries
@@ -42,6 +43,7 @@ It helps users track income and expenses, understand monthly cash flow, review f
 - XAMPP with Apache and MySQL/MariaDB
 - PHP 8.0 or newer
 - PHP `pdo_mysql` extension enabled
+- PHP `curl` extension enabled
 - A modern web browser
 
 ## Installation With XAMPP
@@ -88,6 +90,35 @@ It helps users track income and expenses, understand monthly cash flow, review f
    ```text
    http://localhost/MoneyMap/
    ```
+
+### Google sign-in setup
+
+1. In Google Cloud Console, create an OAuth 2.0 Web application client.
+2. Add `http://localhost/MoneyMap/google_callback.php` as an authorized redirect URI.
+3. Set these environment variables for Apache/PHP. Do not put real credentials in `config/google.php`:
+
+   ```text
+   GOOGLE_CLIENT_ID=your-client-id
+   GOOGLE_CLIENT_SECRET=your-client-secret
+   GOOGLE_REDIRECT_URI=http://localhost/MoneyMap/google_callback.php
+   ```
+
+For XAMPP, add these lines to Apache's `conf/httpd.conf` and restart Apache:
+
+```apache
+SetEnv GOOGLE_CLIENT_ID "your-client-id"
+SetEnv GOOGLE_CLIENT_SECRET "your-client-secret"
+SetEnv GOOGLE_REDIRECT_URI "http://localhost/MoneyMap/google_callback.php"
+```
+
+4. For an existing database, run this once in phpMyAdmin:
+
+   ```sql
+   ALTER TABLE users MODIFY password VARCHAR(255) NULL;
+   ALTER TABLE users ADD google_id VARCHAR(255) NULL UNIQUE;
+   ```
+
+Google accounts are matched by their verified email address, so an existing password account can be linked automatically on its first Google sign-in.
 
 ## Demo Account
 

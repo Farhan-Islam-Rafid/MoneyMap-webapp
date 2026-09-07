@@ -15,7 +15,7 @@
 		<?php endif; ?>
 		<div class="footer-status"><span class="footer-status-dot"></span><strong>MoneyMap is ready</strong><p>Your financial workspace is available whenever you are.</p></div>
 	</div>
-	<div class="site-footer-bottom"><span>MoneyMap v2.0 <b>•</b> Personal finance, made clear.</span><span>Developed by <strong>Farhan Islam Rafid</strong>.</span></div>
+	<div class="site-footer-bottom"><span>MoneyMap v2.0 <b>•</b> Personal finance, made clear.</span><span>Developed by <strong><a href="https://github.com/Farhan-Islam-Rafid" target="_blank" rel="noopener noreferrer">Farhan Islam Rafid</a></strong>.</span></div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
