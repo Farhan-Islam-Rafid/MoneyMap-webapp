@@ -73,19 +73,71 @@ $pageTitle = 'Profile';
 require __DIR__ . '/includes/header.php';
 ?>
 <div class="page-title"><div><span class="eyebrow">YOUR ACCOUNT</span><h1>Profile</h1></div></div>
-<section class="panel narrow-panel">
-    <div class="d-flex align-items-center gap-3 mb-4">
-        <?php if (!empty($user['profile_image'])): ?><img class="avatar avatar-lg" src="assets/uploads/<?= e($user['profile_image']) ?>" alt="Profile image"><?php else: ?><div class="brand-icon profile-placeholder"><i class="fa-solid fa-user"></i></div><?php endif; ?>
-        <div><h2 class="mb-1"><?= e($user['full_name']) ?></h2><span class="muted">Member since <?= pretty_date(substr($user['created_at'], 0, 10)) ?></span></div>
-    </div>
-    <?php foreach ($errors as $error): ?><div class="alert alert-danger py-2"><?= e($error) ?></div><?php endforeach; ?>
-    <form method="post" enctype="multipart/form-data">
-        <input type="hidden" name="_csrf" value="<?= e(csrf_token()) ?>">
-        <div class="mb-3"><label>Profile image</label><input class="form-control" type="file" name="profile_image" accept="image/jpeg,image/png,image/gif,image/webp"><div class="form-text">JPG, PNG, GIF, or WebP. Maximum 2 MB.</div></div>
-        <div class="mb-3"><label>Full name</label><input class="form-control" name="full_name" value="<?= e($user['full_name']) ?>" required></div>
-        <div class="mb-3"><label>Username</label><input class="form-control" value="<?= e($user['username']) ?>" disabled></div>
-        <div class="mb-3"><label>Email</label><input class="form-control" type="email" name="email" value="<?= e($user['email']) ?>" required></div>
-        <hr class="my-4"><label>New password <span class="muted fw-normal">(leave blank to keep current)</span></label><input class="form-control mb-4" type="password" name="password" minlength="8"><button class="btn btn-primary">Update profile</button>
-    </form>
-</section>
+<div class="profile-page">
+    <aside class="profile-summary panel">
+        <div class="profile-avatar-wrap">
+            <?php if (!empty($user['profile_image'])): ?><img class="profile-avatar" src="assets/uploads/<?= e($user['profile_image']) ?>" alt="Profile image"><?php else: ?><div class="profile-avatar placeholder"><i class="fa-solid fa-user"></i></div><?php endif; ?>
+        </div>
+        <div class="profile-summary-body">
+            <span class="profile-badge">Account</span>
+            <h2><?= e($user['full_name']) ?></h2>
+            <p><?= e($user['email']) ?></p>
+            <div class="member-meta">
+                <i class="fa-regular fa-calendar"></i>
+                <span>Member since <?= pretty_date(substr($user['created_at'], 0, 10)) ?></span>
+            </div>
+        </div>
+    </aside>
+
+    <section class="panel profile-panel">
+        <?php foreach ($errors as $error): ?><div class="alert alert-danger py-2 mb-3"><?= e($error) ?></div><?php endforeach; ?>
+
+        <form method="post" enctype="multipart/form-data" class="profile-form">
+            <input type="hidden" name="_csrf" value="<?= e(csrf_token()) ?>">
+
+            <div class="profile-form-section">
+                <div class="section-heading-row">
+                    <h3>Profile details</h3>
+                </div>
+
+                <div class="profile-form-grid">
+                    <div class="form-field form-field-full">
+                        <label>Profile image</label>
+                        <input class="form-control" type="file" name="profile_image" accept="image/jpeg,image/png,image/gif,image/webp">
+                        <div class="form-text">JPG, PNG, GIF, or WebP. Maximum 2 MB.</div>
+                    </div>
+
+                    <div class="form-field">
+                        <label>Full name</label>
+                        <input class="form-control" name="full_name" value="<?= e($user['full_name']) ?>" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label>Username</label>
+                        <input class="form-control" value="<?= e($user['username']) ?>" disabled>
+                    </div>
+
+                    <div class="form-field form-field-full">
+                        <label>Email</label>
+                        <input class="form-control" type="email" name="email" value="<?= e($user['email']) ?>" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-form-section security-section">
+                <div class="section-heading-row">
+                    <h3>Change password</h3>
+                </div>
+                <div class="form-field form-field-full">
+                    <label>New password <span class="muted fw-normal">(leave blank to keep current)</span></label>
+                    <input class="form-control" type="password" name="password" minlength="8">
+                </div>
+            </div>
+
+            <div class="profile-actions">
+                <button class="btn btn-primary">Update profile</button>
+            </div>
+        </form>
+    </section>
+</div>
 <?php require __DIR__ . '/includes/footer.php'; ?>
