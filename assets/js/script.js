@@ -31,7 +31,7 @@ if (themeToggle) {
     });
 }
 
-const footerRevealItems = document.querySelectorAll('.site-footer .reveal-item, .site-footer .footer-watermark');
+const footerRevealItems = document.querySelectorAll('.site-footer .reveal-item');
 if (footerRevealItems.length) {
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {

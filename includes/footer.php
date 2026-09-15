@@ -1,7 +1,6 @@
 <?php $isAuthenticated = $isAuthenticated ?? false; ?>
 </main>
 <footer class="site-footer">
-	<div class="footer-watermark reveal-item" aria-hidden="true">MoneyMap</div>
 	<div class="site-footer-inner reveal-item">
 		<div class="footer-intro reveal-item">
 			<a class="footer-brand" href="index.php"><span class="footer-brand-icon"><i class="fa-solid fa-chart-line"></i></span><span>MoneyMap <small>v2.0</small></span></a>
@@ -15,7 +14,7 @@
 		<div class="footer-column reveal-item"><span class="footer-label">Get started</span><p>Track your first transaction and build a clearer financial picture.</p><a class="footer-action-link" href="register.php">Open MoneyMap <i class="fa-solid fa-arrow-right"></i></a></div>
 		<?php endif; ?>
 	</div>
-	<div class="site-footer-bottom reveal-item"><span>MoneyMap v2.0 <b>•</b> Personal finance, made clear.</span><span>Developed by <strong><a href="https://github.com/Farhan-Islam-Rafid" target="_blank" rel="noopener noreferrer">Farhan Islam Rafid</a></strong>.</span></div>
+	<div class="site-footer-bottom reveal-item"><span>MoneyMap v2.0 <b>•</b> Personal finance, made clear.</span><span class="developer-credit">Developed by <a class="developer-link" href="https://github.com/Farhan-Islam-Rafid" target="_blank" rel="noopener noreferrer">Farhan Islam Rafid</a></span></div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
