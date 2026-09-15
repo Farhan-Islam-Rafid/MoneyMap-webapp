@@ -30,3 +30,20 @@ if (themeToggle) {
         setThemeIcon();
     });
 }
+
+const footerRevealItems = document.querySelectorAll('.site-footer .reveal-item, .site-footer .footer-watermark');
+if (footerRevealItems.length) {
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.18, rootMargin: '0px 0px -40px 0px' });
+
+    footerRevealItems.forEach((element, index) => {
+        element.style.setProperty('--delay', `${index * 80}ms`);
+        revealObserver.observe(element);
+    });
+}
